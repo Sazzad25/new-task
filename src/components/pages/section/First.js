@@ -30,7 +30,7 @@ const First = () => {
               image: imgData.data.url
             }
             
-            fetch('http://localhost:5000/postSubmit', {
+            fetch('https://end-first-server.vercel.app/postSubmit', {
             method: 'POST',
             headers: {
               'content-type': 'application/json',

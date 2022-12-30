@@ -1,22 +1,15 @@
+import { async } from "@firebase/util";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Media = () => {
-//   const [post, setPost] = useState({});
-
-//   const url = 'http://localhost:5000/postSubmit';
-
-//   useEffect(() => {
-//     fetch(url)
-//       .then((res) => res.json())
-//       .then((data) => setPost(data));
-//   }, []);
 
 const { data: Text } = useQuery({
     queryKey: ["Text"],
     queryFn: async () => {
       try {
-        const res = await fetch("http://localhost:5000/postSubmit", {
+        const res = await fetch("https://end-first-server.vercel.app/postSubmit", {
           headers: {
            
           },
@@ -30,13 +23,14 @@ const { data: Text } = useQuery({
   return (
     <div>
       <h2 className="text-3xl">Total post: {Text?.length}</h2>
-      <div className="overflow-x-auto">
+       <div className="overflow-x-auto">
         <table className="table w-full">
           <thead>
             <tr>
               <th></th>
               <th>Image</th>
               <th>Text</th>
+              <th>Button</th>
             </tr>
           </thead>
           <tbody>
@@ -46,16 +40,19 @@ const { data: Text } = useQuery({
                 <td>
                   <div className="avatar">
                     <div className="w-24 rounded-full">
-                      <img src={post.image} alt='' />
+                      <img src={post?.image} alt='' />
                     </div>
                   </div>
                 </td>
-                <td>{post.message}</td>
+                <td>{post?.message}</td>
+                <td>
+                  <Link  className="btn" to='/details'>Details</Link>
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
-      </div>
+       </div> 
     </div>
   );
 };
